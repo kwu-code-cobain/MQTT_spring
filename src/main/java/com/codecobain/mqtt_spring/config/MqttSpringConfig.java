@@ -5,7 +5,11 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Value;
+
 
 @EnableAsync
 @Configuration
