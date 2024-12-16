@@ -11,7 +11,7 @@ import com.codecobain.mqtt_spring.service.MqttSpringService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,18 +28,21 @@ public class MqttSpringController {
         return ResponseEntity.ok("success to publish message");
     }
 
-    @GetMapping("message")
-    public ResponseEntity<?> getMessage() {
+    @GetMapping("subscribe/{topic}")
+    public ResponseEntity<?> subscribeTopic(@PathVariable String topic) {
         try {
-            service.getMessage();
+            service.subscribeTopic(topic);
             return ResponseEntity.ok("success to get message");
-            
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-            // TODO: handle exception
         }
-        
     }
-    
-
+    @GetMapping("message/{topic}")
+    public ResponseEntity<?> getMethodName(@PathVariable String topic) {
+        try {
+            return ResponseEntity.ok(service.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
